@@ -13,7 +13,7 @@ export class Service {
         if (location.port === "4200") {
             return "http://localhost:8080";
         } else {
-            return location.href;
+            return location.origin;
         }
     }
 

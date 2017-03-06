@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CardBoardEditModalComponent } from '../card-board-edit-modal/card-board-edit-modal.component';
 
 @Component({
-  selector: 'app-card-board-list',
+  selector: 'card-board-list',
   templateUrl: './card-board-list.component.html',
   styleUrls: ['./card-board-list.component.css']
 })

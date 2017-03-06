@@ -1,3 +1,1 @@
-<div class="card" [ngStyle]="getStyle(card)">
-  {{ card.text }}
-</div>
+<div class="card" [ngStyle]="getStyle(card)" [innerHTML]="card.text"></div>

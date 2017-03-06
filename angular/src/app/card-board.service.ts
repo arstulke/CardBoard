@@ -27,12 +27,7 @@ export class CardBoardService {
   }
 
   public createCardBoard(cardBoard): Promise<CardBoard> {
-    while(cardBoard.name.startsWith(" ")) {
-      cardBoard.name = cardBoard.name.substring(1, cardBoard.name.length);
-    }
-    while(cardBoard.name.endsWith(" ")) {
-      cardBoard.name = cardBoard.name.substring(0, cardBoard.name.length - 1);
-    }
+    cardBoard.name = this.removeWhitespaces(cardBoard.name);
     return this.service.post("/card-board", cardBoard).then(Converter.jsonToCardBoard);
   }
 
@@ -41,23 +36,12 @@ export class CardBoardService {
   }
 
   public renameCardBoard(id: Number, name: String): Promise<CardBoard> {
-    while(name.startsWith(" ")) {
-      name = name.substring(1, name.length);
-    }
-    while(name.endsWith(" ")) {
-      name = name.substring(0, name.length - 1);
-    }
-    console.log(name);
+    name = this.removeWhitespaces(name);
     return this.service.put("/card-board/" + id + "/name", name).then(Converter.jsonToCardBoard);
   }
 
   public createCard(id: Number, card: Card): Promise<Card> {
-    while(card.text.startsWith(" ")) {
-      card.text = card.text.substring(1, card.text.length);
-    }
-    while(card.text.endsWith(" ")) {
-      card.text = card.text.substring(0, card.text.length - 1);
-    }
+    card.text = this.removeWhitespaces(card.text);
     return this.service.put("/card-board/" + id + "/card", card).then(Converter.jsonToCard);
   }
 
@@ -66,12 +50,7 @@ export class CardBoardService {
   }
 
   public updateCard(id: Number, newCard: Card): Promise<Card> {
-    while(newCard.text.startsWith(" ")) {
-      newCard.text = newCard.text.substring(1, newCard.text.length);
-    }
-    while(newCard.text.endsWith(" ")) {
-      newCard.text = newCard.text.substring(0, newCard.text.length - 1);
-    }
+    newCard.text = this.removeWhitespaces(newCard.text);
     return this.service.put("/card/" + id, newCard).then(Converter.jsonToCard);
   }
   public updateCardPosition(card: Card, newPosition: Object): Promise<Card> {
@@ -80,6 +59,18 @@ export class CardBoardService {
     } else {
       return Promise.resolve(null);
     }
+  }
+
+  private removeWhitespaces(name): String {
+    if(name !== null) {
+      while(name.startsWith(" ")) {
+        name = name.substring(1, name.length);
+      }
+      while(name.endsWith(" ")) {
+        name = name.substring(0, name.length - 1);
+      }
+    }
+    return name;
   }
 }
 

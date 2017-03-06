@@ -7,7 +7,7 @@ import { Component, ViewChild, TemplateRef } from '@angular/core';
 import { NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-card-board-view',
+  selector: 'card-board-view',
   templateUrl: './card-board-view.component.html'
 })
 export class CardBoardViewComponent {
