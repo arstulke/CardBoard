@@ -13,11 +13,11 @@ export class CardInsertModalComponent {
 
   constructor(private modalService: NgbModal, private cardBoardService: CardBoardService) { }
 
-  public open(item, label, cardboard): Promise<never> {
+  public open(item, label, cardBoard): Promise<never> {
     this.data = { model: item, title: label };
     return this.modalService.open(this.modalContent).result.then((result) => {
       if (item.getId() === null) {
-        return this.cardBoardService.createCard(cardboard.getId(), result.model);
+        return this.cardBoardService.createCard(cardBoard.getId(), result.model);
       } else {
         return this.cardBoardService.updateCard(item.getId(), result.model);
       }

@@ -1,16 +1,35 @@
-<div class="col-md-12">
+<div class="container">
   <button (click)="refresh()" style="margin-top: 20px; margin-bottom: 20px;" class="btn btn-primary">Refresh</button>
+
+  <div *ngIf="cardBoard !== undefined" class="col-md-12">
+    <div class="row">
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let row of cardBoard.getTable().getRows()">
+            <td *ngFor="let card of row" context-menu [subject]="card" [menu-options]="menuOptions" draggable [isItemValid]="isValid"
+              (onswap)="onswap($event)">
+              <card [data]="card"></card>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row" style="margin-top: 35px; margin-bottom: 35px">
+      <div class="col-md-10">
+        <div class="card">
+          <div class="card-header">
+            <span class="h3">Log
+            <span class="float-right">
+              <button class="btn btn-primary" (click)="refresh()">Refresh</button>
+            </span>
+            </span>
+          </div>
+          <div class="card-block">
+            <pre *ngFor="let log of logs">{{ log.text }}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <insert-modal #insertModal></insert-modal>
 </div>
-<div *ngIf="cardboard !== undefined" class="col-md-12">
-  <table class="table">
-    <tbody>
-      <tr *ngFor="let row of cardboard.getTable().getRows()">
-        <td *ngFor="let card of row" context-menu [subject]="card" [menu-options]="menuOptions" draggable [isItemValid]="isValid"
-          (onswap)="onswap($event)">
-          <card [data]="card"></card>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<insert-modal #insertModal></insert-modal>

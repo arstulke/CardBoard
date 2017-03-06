@@ -22,7 +22,7 @@ export class CardBoardViewComponent {
       default: true,
       label: (item) => !this.isValid(item) ? "Einfügen" : "Bearbeiten",
       execute: (event, item) => {
-        this.cardInsertModalComponent.open(item, event["label"], this.cardboard)
+        this.cardInsertModalComponent.open(item, event["label"], this.cardBoard)
           .then(response => this.refresh());
       }
     }, {
@@ -32,8 +32,9 @@ export class CardBoardViewComponent {
         .then(response => this.refresh())
     }
   ];
+  private logs;
 
-  private cardboard: CardBoard;
+  private cardBoard: CardBoard;
 
   constructor(private activatedRoute: ActivatedRoute, private cardBoardService: CardBoardService) {
     this.refresh();
@@ -41,7 +42,8 @@ export class CardBoardViewComponent {
 
   private refresh() {
     this.activatedRoute.params.subscribe(params => {
-      this.cardBoardService.get(params["id"]).then(response => this.cardboard = response);
+      this.cardBoardService.get(params["id"]).then(response => this.cardBoard = response);
+      this.cardBoardService.getLog(params["id"]).then(response => this.logs = response);
     });
   }
 

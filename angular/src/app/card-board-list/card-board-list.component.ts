@@ -39,7 +39,7 @@ export class CardBoardListComponent {
 
   private refresh() {
     this.cardBoardService.getAll().then(response => this.cardboards = response);
-    this.cardBoardService.getLog().then(response => this.logs = response);
+    this.cardBoardService.getLogs().then(response => this.logs = response);
   }
 
   private create() {

@@ -44,9 +44,13 @@ public class CardBoardController {
     @Transactional
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public void delete(@PathVariable Long id) {
-        String old = cardBoardRepo.findOne(id).toString();
+        CardBoard cardBoard = cardBoardRepo.findOne(id);
+        logRepo.findByCardBoard(cardBoard).forEach(log -> {
+            log.setCardBoard(null);
+            logRepo.save(log);
+        });
         cardBoardRepo.delete(id);
-        logRepo.save(new Log(" - Deleted\n\t" + old + "\n\t"));
+        logRepo.save(new Log(" - Deleted\n\t" + cardBoard + "\n\t", null));
     }
 
     @Transactional
@@ -56,7 +60,7 @@ public class CardBoardController {
             cardBoard.setCards(new ArrayList<>());
         }
         cardBoard = cardBoardRepo.save(cardBoard);
-        logRepo.save(new Log(" - Created\n\t" + cardBoard + "\n\t"));
+        logRepo.save(new Log(" - Created\n\t" + cardBoard + "\n\t", cardBoard));
         return cardBoard;
     }
 
@@ -71,7 +75,7 @@ public class CardBoardController {
         Util.moveAll(card, cardBoard);
         cardRepo.save(card);
         cardBoardRepo.save(cardBoard);
-        logRepo.save(new Log(" - Added\n\t" + card + "\n\tto " + cardBoard + "\n\t"));
+        logRepo.save(new Log(" - Added\n\t" + card + "\n\tto " + cardBoard + "\n\t", cardBoard));
         return cardBoard;
     }
 
@@ -83,7 +87,7 @@ public class CardBoardController {
 
         cardBoard.setName(name);
 
-        logRepo.save(new Log(" - Renamed\n\t" + old + "\n\tto " + cardBoard.getName() + "\n\t"));
+        logRepo.save(new Log(" - Renamed\n\t" + old + "\n\tto " + cardBoard.getName() + "\n\t", cardBoard));
         return cardBoardRepo.save(cardBoard);
     }
 }

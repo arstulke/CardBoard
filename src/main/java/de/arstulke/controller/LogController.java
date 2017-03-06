@@ -1,6 +1,8 @@
 package de.arstulke.controller;
 
+import de.arstulke.model.CardBoard;
 import de.arstulke.model.Log;
+import de.arstulke.repositories.CardBoardRepository;
 import de.arstulke.repositories.LogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +21,21 @@ import java.util.List;
 public class LogController {
     @Autowired
     private LogRepository logRepo;
+    @Autowired
+    private CardBoardRepository cardBoardRepo;
 
     @Transactional
     @GetMapping(value = "", produces = "application/json")
     public List<Log> readAll() {
         List<Log> logs = logRepo.findAll();
+        logs.sort(Comparator.comparing(Log::getTime).reversed());
+        return logs;
+    }
+
+    @Transactional
+    @GetMapping(value = "/{id}", produces = "application/json")
+    public List<Log> read(@PathVariable Long id) {
+        List<Log> logs = logRepo.findByCardBoard(cardBoardRepo.findOne(id));
         logs.sort(Comparator.comparing(Log::getTime).reversed());
         return logs;
     }

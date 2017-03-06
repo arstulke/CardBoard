@@ -25,7 +25,7 @@ export class CardBoard {
             table[card.getPosition().y][card.getPosition().x] = card;
         });
         return new Table<Card>(table, (y, x, buffer) => {
-            return new Card(null, " ", { x: x - buffer.left, y: y - buffer.top }, null, null);
+            return new Card(null, null, { x: x - buffer.left, y: y - buffer.top }, null, null);
         }, {
             bottom: 1,
             right: 1,

@@ -8,8 +8,12 @@ export class CardBoardService {
 
   constructor(private service: Service) { }
 
-  public getLog(): Promise<Object[]> {
+  public getLogs(): Promise<Object[]> {
     return this.service.get("/log");
+  }
+
+  public getLog(id: Number): Promise<Object[]> {
+    return this.service.get("/log/" + id);
   }
 
   public getAll(): Promise<CardBoard[]> {
@@ -22,14 +26,14 @@ export class CardBoardService {
       .then(Converter.jsonToCardBoard);
   }
 
-  public createCardBoard(cardboard): Promise<CardBoard> {
-    while(cardboard.name.startsWith(" ")) {
-      cardboard.name = cardboard.name.substring(1, cardboard.name.length);
+  public createCardBoard(cardBoard): Promise<CardBoard> {
+    while(cardBoard.name.startsWith(" ")) {
+      cardBoard.name = cardBoard.name.substring(1, cardBoard.name.length);
     }
-    while(cardboard.name.endsWith(" ")) {
-      cardboard.name = cardboard.name.substring(0, cardboard.name.length - 1);
+    while(cardBoard.name.endsWith(" ")) {
+      cardBoard.name = cardBoard.name.substring(0, cardBoard.name.length - 1);
     }
-    return this.service.post("/card-board", cardboard).then(Converter.jsonToCardBoard);
+    return this.service.post("/card-board", cardBoard).then(Converter.jsonToCardBoard);
   }
 
   public deleteCardBoard(id: Number): Promise<never> {

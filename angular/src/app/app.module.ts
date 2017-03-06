@@ -39,7 +39,7 @@ import { CardBoardEditModalComponent } from './card-board-edit-modal/card-board-
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {
-        path: "cardboard/:id",
+        path: "cardBoard/:id",
         component: CardBoardViewComponent
       },
       {

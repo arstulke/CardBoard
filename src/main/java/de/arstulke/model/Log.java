@@ -12,7 +12,6 @@ public class Log {
     @Id
     @GeneratedValue
     private Long id;
-
     @Basic
     private Date time;
 
@@ -20,16 +19,20 @@ public class Log {
     @Column(length = 2000)
     private String text;
 
+    @ManyToOne(targetEntity = CardBoard.class)
+    private CardBoard cardBoard;
+
     public Log() {
     }
 
-    public Log(Date time, String text) {
+    public Log(Date time, String text, CardBoard cardBoard) {
         this.time = time;
         this.text = text;
+        this.cardBoard = cardBoard;
     }
 
-    public Log(String text) {
-        this(new Date(), text);
+    public Log(String text, CardBoard cardBoard) {
+        this(new Date(), text, cardBoard);
     }
 
     public Long getId() {
@@ -54,6 +57,14 @@ public class Log {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public CardBoard getCardBoard() {
+        return cardBoard;
+    }
+
+    public void setCardBoard(CardBoard cardBoard) {
+        this.cardBoard = cardBoard;
     }
 
     @Override

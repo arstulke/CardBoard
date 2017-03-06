@@ -21,12 +21,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let cardboard of cardboards" [routerLink]="'cardboard/' + cardboard.getId()" context-menu [subject]="cardboard"
+              <tr *ngFor="let cardBoard of cardboards" [routerLink]="'cardBoard/' + cardBoard.getId()" context-menu [subject]="cardBoard"
                 [menu-options]="menuOptions">
-                <td>{{ cardboard.getName() }}</td>
-                <td>{{ cardboard.getTable().getWidth() }}</td>
-                <td>{{ cardboard.getTable().getHeight() }}</td>
-                <td>{{ cardboard.getCards().length }}</td>
+                <td>{{ cardBoard.getName() }}</td>
+                <td>{{ cardBoard.getTable().getWidth() }}</td>
+                <td>{{ cardBoard.getTable().getHeight() }}</td>
+                <td>{{ cardBoard.getCards().length }}</td>
               </tr>
             </tbody>
           </table>
