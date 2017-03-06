@@ -1,0 +1,16 @@
+<div class="col-md-12">
+  <button (click)="refresh()" style="margin-top: 20px; margin-bottom: 20px;" class="btn btn-primary">Refresh</button>
+</div>
+<div *ngIf="cardboard !== undefined" class="col-md-12">
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let row of cardboard.getTable().getRows()">
+        <td *ngFor="let card of row" context-menu [subject]="card" [menu-options]="menuOptions" draggable [isItemValid]="isValid"
+          (onswap)="onswap($event)">
+          <card [data]="card"></card>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<insert-modal #insertModal></insert-modal>

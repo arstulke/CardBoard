@@ -1,0 +1,22 @@
+.card {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+
+    text-align: center;
+    min-height: 90px;
+    min-width: 165px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+    -o-user-select:none;
+
+    cursor: default;
+}

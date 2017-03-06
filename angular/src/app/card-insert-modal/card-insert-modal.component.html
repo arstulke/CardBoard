@@ -1,0 +1,26 @@
+<template #modal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{ data.title }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body form">
+    <div class="form-group">
+      <label>Text:</label>
+      <input type="text" class="form-control" (keydown)="checkSubmit($event, c, data)" [(ngModel)]="data.model.text" autofocus/>
+    </div>
+    <div *ngIf="isValidColor(data.model.textColor)" class="form-group">
+      <label>Text Color:</label>
+      <input type="color"[(ngModel)]="data.model.textColor">
+    </div>
+    <div *ngIf="isValidColor(data.model.backgroundColor)" class="form-group">
+      <label>Background Color:</label>
+      <input type="color"[(ngModel)]="data.model.backgroundColor">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="c(data)">Submit</button>
+    <button type="button" class="btn btn-danger" (click)="d('Close click')">Close</button>
+  </div>
+</template>

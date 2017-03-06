@@ -1,0 +1,32 @@
+target/
+src/main/resources/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+
+### Angular ###
+/angular/dist
+/angular/tmp
+/angular/node_modules
+/angular/.vscode
+/angular/e2e
