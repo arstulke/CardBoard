@@ -14,6 +14,12 @@ export class CardInsertModalComponent {
   constructor(private modalService: NgbModal, private cardBoardService: CardBoardService) { }
 
   public open(item, label, cardBoard): Promise<never> {
+    if(!this.isValidColor(item.backgroundColor)) {
+      item.backgroundColor = "#00ff00";
+    }
+    if(!this.isValidColor(item.textColor)) {
+      item.textColor = "#000000";
+    }
     this.data = { model: item, title: label };
     return this.modalService.open(this.modalContent).result.then((result) => {
       if (item.getId() === null) {

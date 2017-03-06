@@ -31,7 +31,7 @@ export class CardBoardListComponent {
 
   @ViewChild(CardBoardEditModalComponent) private cardBoardEditModalComponent;
   private cardboards: CardBoard[];
-  private logs: Object[];
+  private logs;
 
   constructor(private cardBoardService: CardBoardService) {
     this.refresh();
@@ -51,5 +51,9 @@ export class CardBoardListComponent {
     if (event.key === "Enter") {
       close(model);
     }
+  }
+
+  private getLog() {
+    return this.logs.map(log => log.text).join("");
   }
 }

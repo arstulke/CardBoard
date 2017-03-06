@@ -25,7 +25,12 @@
             </span>
           </div>
           <div class="card-block">
-            <pre *ngFor="let log of logs">{{ log.text }}</pre>
+            <div *ngIf="logs !== undefined && logs.length > 0">
+              <pre>{{ getLog() }}</pre>
+            </div>
+            <div *ngIf="logs === undefined || logs.length == 0">
+              Kein Log vorhanden
+            </div>
           </div>
         </div>
       </div>

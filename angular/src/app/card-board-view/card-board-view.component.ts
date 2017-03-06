@@ -68,4 +68,8 @@ export class CardBoardViewComponent {
         });
     }
   }
+
+  private getLog() {
+    return this.logs.map(log => log.text).join("");
+  }
 }
