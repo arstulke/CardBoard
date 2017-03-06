@@ -25,14 +25,10 @@ public class Log {
     public Log() {
     }
 
-    public Log(Date time, String text, CardBoard cardBoard) {
-        this.time = time;
+    public Log(String text, CardBoard cardBoard) {
+        this.time = new Date();
         this.text = text;
         this.cardBoard = cardBoard;
-    }
-
-    public Log(String text, CardBoard cardBoard) {
-        this(new Date(), text, cardBoard);
     }
 
     public Long getId() {

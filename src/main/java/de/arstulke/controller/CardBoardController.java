@@ -75,7 +75,7 @@ public class CardBoardController {
         Util.moveAll(card, cardBoard);
         cardRepo.save(card);
         cardBoardRepo.save(cardBoard);
-        logRepo.save(new Log(" - Added\n\t" + card + "\n\tto " + cardBoard + "\n", cardBoard));
+        logRepo.save(new Log(" - Added\n\t" + card.forLogging() + "\n\tto " + cardBoard + "\n", cardBoard));
         return cardBoard;
     }
 

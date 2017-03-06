@@ -108,4 +108,16 @@ public class Card implements Serializable {
                 ", position=" + position +
                 '}';
     }
+
+    public String forLogging() {
+        int end = text.length() < 35 ? text.length() : 35;
+        String text = this.text.substring(0, end) + "...";
+        return "Card{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", backgroundColor='" + backgroundColor + '\'' +
+                ", textColor='" + textColor + '\'' +
+                ", position=" + position +
+                '}';
+    }
 }

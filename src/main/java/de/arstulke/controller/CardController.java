@@ -45,20 +45,20 @@ public class CardController {
         cardRepo.delete(card);
         cardBoardRepo.save(cardBoard);
 
-        logRepo.save(new Log(" - Deleted\n\t" + card + "\n\tfrom " + cardBoard + "\n", cardBoard));
+        logRepo.save(new Log(" - Deleted\n\t" + card.forLogging() + "\n\tfrom " + cardBoard + "\n", cardBoard));
     }
 
     @Transactional
     @PutMapping(value = "/{id}", produces = "application/json", consumes = "application/json")
     public Card update(@RequestBody Card newCard, @PathVariable Long id) {
         Card card = cardRepo.findOne(id);
-        String old = card.toString();
+        String old = card.forLogging();
 
         card.setText(newCard.getText());
         card.setTextColor(newCard.getTextColor());
         card.setBackgroundColor(newCard.getBackgroundColor());
 
-        logRepo.save(new Log(" - Updated\n\t" + old + "\n\tto " + card + "\n", card.getCardBoard()));
+        logRepo.save(new Log(" - Updated\n\t" + old + "\n\tto " + card.forLogging() + "\n", card.getCardBoard()));
         return cardRepo.save(card);
     }
 
@@ -66,7 +66,7 @@ public class CardController {
     @PutMapping(value = "/{id}/position", produces = "application/json", consumes = "application/json")
     public Card move(@RequestBody Position newPosition, @PathVariable Long id) {
         Card card = cardRepo.findOne(id);
-        String old = card + "\n\tfrom " + card.getPosition();
+        String old = card.forLogging() + "\n\tfrom " + card.getPosition();
         card.setPosition(newPosition);
 
         Util.moveAll(card, card.getCardBoard());
