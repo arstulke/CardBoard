@@ -47,7 +47,7 @@ import { CardBoardEditModalComponent } from './card-board-edit-modal/card-board-
         component: CardBoardListComponent,
         pathMatch: "full"
       }
-    ])
+    ], { useHash: true })
   ],
   providers: [
     Service,
