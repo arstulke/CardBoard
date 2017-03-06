@@ -32,19 +32,22 @@ export class CardBoardViewComponent {
         .then(response => this.refresh())
     }
   ];
-  private logs;
+
+  private id: Number;
 
   private cardBoard: CardBoard;
+  private logs;
 
   constructor(private activatedRoute: ActivatedRoute, private cardBoardService: CardBoardService) {
-    this.refresh();
+    this.activatedRoute.params.subscribe(params => {
+      this.id = params["id"];
+      this.refresh();
+    });
   }
 
   private refresh() {
-    this.activatedRoute.params.subscribe(params => {
-      this.cardBoardService.get(params["id"]).then(response => this.cardBoard = response);
-      this.cardBoardService.getLog(params["id"]).then(response => this.logs = response);
-    });
+      this.cardBoardService.get(this.id).then(response => this.cardBoard = response);
+      this.cardBoardService.getLog(this.id).then(response => this.logs = response);
   }
 
   @ViewChild("insertModal") private cardInsertModalComponent: CardInsertModalComponent;

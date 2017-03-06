@@ -18,7 +18,6 @@ export class CardComponent {
     else {
       return {
         backgroundColor: backgroundColor,
-        borderColor: backgroundColor,
         color: textColor
       };
     }
