@@ -45,7 +45,7 @@ public class CardController {
         cardRepo.delete(card);
         cardBoardRepo.save(cardBoard);
 
-        logRepo.save(new Log(" - Deleted\n\t" + card.forLogging() + "\n\tfrom " + cardBoard + "\n", cardBoard));
+        logRepo.save(new Log("Deleted\n\t" + card.forLogging() + "\n\tfrom " + cardBoard + "\n", cardBoard));
     }
 
     @Transactional
@@ -58,7 +58,7 @@ public class CardController {
         card.setTextColor(newCard.getTextColor());
         card.setBackgroundColor(newCard.getBackgroundColor());
 
-        logRepo.save(new Log(" - Updated\n\t" + old + "\n\tto " + card.forLogging() + "\n", card.getCardBoard()));
+        logRepo.save(new Log("Updated\n\t" + old + "\n\tto " + card.forLogging() + "\n", card.getCardBoard()));
         return cardRepo.save(card);
     }
 
@@ -71,7 +71,7 @@ public class CardController {
 
         Util.moveAll(card, card.getCardBoard());
 
-        logRepo.save(new Log(" - Moved\n\t" + old + "\n\tto " + card.getPosition() + "\n", card.getCardBoard()));
+        logRepo.save(new Log("Moved\n\t" + old + "\n\tto " + card.getPosition() + "\n", card.getCardBoard()));
         return cardRepo.save(card);
     }
 }

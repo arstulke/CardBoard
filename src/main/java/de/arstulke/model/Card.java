@@ -110,8 +110,8 @@ public class Card implements Serializable {
     }
 
     public String forLogging() {
-        int end = text.length() < 35 ? text.length() : 35;
-        String text = this.text.substring(0, end) + "...";
+        int end = text.length() <= 35 ? text.length() : 35;
+        String text = this.text.substring(0, end) + (end < this.text.length() ? "..." : "");
         return "Card{" +
                 "id=" + id +
                 ", text='" + text + '\'' +

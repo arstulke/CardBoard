@@ -1,7 +1,9 @@
 package de.arstulke.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created Log.java in de.arstulke.model
@@ -13,7 +15,7 @@ public class Log {
     @GeneratedValue
     private Long id;
     @Basic
-    private Date time;
+    private LocalDateTime time;
 
     @Basic
     @Column(length = 2000)
@@ -26,7 +28,7 @@ public class Log {
     }
 
     public Log(String text, CardBoard cardBoard) {
-        this.time = new Date();
+        this.time = LocalDateTime.now();
         this.text = text;
         this.cardBoard = cardBoard;
     }
@@ -39,11 +41,11 @@ public class Log {
         this.id = id;
     }
 
-    public Date getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 
@@ -55,6 +57,7 @@ public class Log {
         this.text = text;
     }
 
+    @JsonIgnore
     public CardBoard getCardBoard() {
         return cardBoard;
     }

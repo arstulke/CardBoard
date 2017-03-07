@@ -3,6 +3,7 @@ package de.arstulke.controller;
 import de.arstulke.model.Card;
 import de.arstulke.model.CardBoard;
 import de.arstulke.model.Log;
+import de.arstulke.model.Position;
 import de.arstulke.repositories.CardBoardRepository;
 import de.arstulke.repositories.CardRepository;
 import de.arstulke.repositories.LogRepository;
@@ -10,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -50,17 +51,21 @@ public class CardBoardController {
             logRepo.save(log);
         });
         cardBoardRepo.delete(id);
-        logRepo.save(new Log(" - Deleted\n\t" + cardBoard + "\n", null));
+        logRepo.save(new Log("Deleted\n\t" + cardBoard + "\n", null));
     }
 
     @Transactional
     @PostMapping(value = "", produces = "application/json", consumes = "application/json")
     public CardBoard createCardBoard(@RequestBody CardBoard cardBoard) {
         if (cardBoard.getCards() == null) {
-            cardBoard.setCards(new ArrayList<>());
+            cardBoard.setCards(Arrays.asList(
+                    new Card("Das ist dein CardBoard", new Position(0, 0)),
+                    new Card("Hier kannst du Cards erstellen, verschieben und bearbeiten.", new Position(0, 1))
+            ));
+            cardBoard.getCards().forEach(card -> card.setCardBoard(cardBoard));
         }
-        cardBoard = cardBoardRepo.save(cardBoard);
-        logRepo.save(new Log(" - Created\n\t" + cardBoard + "\n", cardBoard));
+        cardBoardRepo.save(cardBoard);
+        logRepo.save(new Log("Created\n\t" + cardBoard + "\n", cardBoard));
         return cardBoard;
     }
 
@@ -75,7 +80,7 @@ public class CardBoardController {
         Util.moveAll(card, cardBoard);
         cardRepo.save(card);
         cardBoardRepo.save(cardBoard);
-        logRepo.save(new Log(" - Added\n\t" + card.forLogging() + "\n\tto " + cardBoard + "\n", cardBoard));
+        logRepo.save(new Log("Added\n\t" + card.forLogging() + "\n\tto " + cardBoard + "\n", cardBoard));
         return cardBoard;
     }
 
@@ -87,7 +92,7 @@ public class CardBoardController {
 
         cardBoard.setName(name);
 
-        logRepo.save(new Log(" - Renamed\n\t" + old + "\n\tto " + cardBoard.getName() + "\n", cardBoard));
+        logRepo.save(new Log("Renamed\n\t" + old + "\n\tto " + cardBoard.getName() + "\n", cardBoard));
         return cardBoardRepo.save(cardBoard);
     }
 }
