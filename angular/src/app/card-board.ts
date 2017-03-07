@@ -33,4 +33,10 @@ export class CardBoard {
             top: 1
         });
     }
+
+  public swap(itemA: Card, itemB: Card) {
+    let tmp = itemA.getPosition();
+    itemA.setPosition(itemB.getPosition());
+    itemB.setPosition(tmp);
+  }
 }

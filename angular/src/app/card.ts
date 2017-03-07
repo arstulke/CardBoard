@@ -20,4 +20,8 @@ export class Card {
     public getTextColor(): String {
         return this.textColor;
     }
+
+    public setPosition(position: any) {
+        this.position = position;
+    }
 }
