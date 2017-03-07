@@ -1,4 +1,5 @@
 import { Util } from '../util';
+import { Card } from '../card';
 import { CardBoard } from '../card-board';
 import { ActivatedRoute } from '@angular/router';
 import { CardBoardService } from '../card-board.service';
@@ -46,8 +47,15 @@ export class CardBoardViewComponent {
   }
 
   private refresh() {
-      this.cardBoardService.get(this.id).then(response => this.cardBoard = response);
-      this.cardBoardService.getLog(this.id).then(response => this.logs = response);
+    this.cardBoardService.get(this.id).then(response => this.cardBoard = response);
+  }
+
+  private refreshLog() {
+    this.cardBoardService.getLog(this.id).then(response => this.logs = response);
+  }
+
+  private getLog() {
+    return this.logs.map(log => log.text).join("");
   }
 
   @ViewChild("insertModal") private cardInsertModalComponent: CardInsertModalComponent;
@@ -64,15 +72,17 @@ export class CardBoardViewComponent {
 
   private onswap(event: any) {
     if (event.itemA !== event.itemB) {
-      this.cardBoardService.updateCardPosition(event.itemA, event.itemB.getPosition())
+      let positionA = {};
+      let positionB = {};
+      Object.assign(positionA, event.itemA.getPosition());
+      Object.assign(positionB, event.itemB.getPosition());
+
+      this.cardBoard.swap(event.itemA, event.itemB);
+      this.cardBoardService.updateCardPosition(event.itemA, positionB)
         .then(response => {
-          this.cardBoardService.updateCardPosition(event.itemB, event.itemA.getPosition())
+          this.cardBoardService.updateCardPosition(event.itemB, positionA)
             .then(response => this.refresh())
         });
     }
-  }
-
-  private getLog() {
-    return this.logs.map(log => log.text).join("");
   }
 }

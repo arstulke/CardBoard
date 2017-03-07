@@ -39,6 +39,9 @@ export class CardBoardListComponent {
 
   private refresh() {
     this.cardBoardService.getAll().then(response => this.cardboards = response);
+  }
+
+  private refreshLog() {
     this.cardBoardService.getLogs().then(response => this.logs = response);
   }
 

@@ -43,7 +43,7 @@
         <div class="card-header">
           <span class="h3">Log
             <span class="float-right">
-              <button class="btn btn-primary" (click)="refresh()">Refresh</button>
+              <button class="btn btn-primary" (click)="refreshLog()">Refresh</button>
             </span>
           </span>
         </div>
@@ -52,7 +52,7 @@
             <pre>{{ getLog() }}</pre>
           </div>
           <div *ngIf="logs === undefined || logs.length == 0">
-            Kein Log vorhanden
+            Log nicht geladen oder nicht vorhanden.
           </div>
         </div>
       </div>

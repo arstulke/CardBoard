@@ -1,10 +1,12 @@
-<div class="container">
-  <button (click)="refresh()" style="margin-top: 20px; margin-bottom: 20px;" class="btn btn-primary">Refresh</button>
+<div class="col-md-12">
+  <div style="margin-top: 20px; margin-bottom: 20px;">
+    <button routerLink="/" class="btn btn-primary">Zurück</button>
+    <button (click)="refresh()" class="btn btn-primary">Refresh</button>
+  </div>
 
-  <div *ngIf="cardBoard !== undefined" class="col-md-12">
-    <div class="row">
-      <table class="table">
-        <tbody>
+  <div *ngIf="cardBoard !== undefined">
+    <table class="table">
+      <tbody>
         <tr *ngFor="let row of cardBoard.getTable().getRows()">
           <td *ngFor="let card of row" context-menu [subject]="card" [menu-options]="menuOptions" draggable
               [isItemValid]="isValid"
@@ -12,25 +14,22 @@
             <card [data]="card"></card>
           </td>
         </tr>
-        </tbody>
-      </table>
-      <div class="col-md-10">
-        <div class="card">
-          <div class="card-header">
-            <span class="h3">Log
+      </tbody>
+    </table>
+    <div class="card">
+      <div class="card-header">
+        <span class="h3">Log
             <span class="float-right">
-              <button class="btn btn-primary" (click)="refresh()">Refresh</button>
+              <button class="btn btn-primary" (click)="refreshLog()">Refresh</button>
             </span>
-            </span>
-          </div>
-          <div class="card-block">
-            <div *ngIf="logs !== undefined && logs.length > 0">
-              <pre>{{ getLog() }}</pre>
-            </div>
-            <div *ngIf="logs === undefined || logs.length == 0">
-              Kein Log vorhanden
-            </div>
-          </div>
+        </span>
+      </div>
+      <div class="card-block">
+        <div *ngIf="logs !== undefined && logs.length > 0">
+          <pre>{{ getLog() }}</pre>
+        </div>
+        <div *ngIf="logs === undefined || logs.length == 0">
+          Log nicht geladen oder nicht vorhanden.
         </div>
       </div>
     </div>

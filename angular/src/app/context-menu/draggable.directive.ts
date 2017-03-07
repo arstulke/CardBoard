@@ -12,6 +12,7 @@ export class DraggableDirective {
   @Output("onswap") private onswap = new EventEmitter();
 
   private static dragItem;
+  public static isDragged: Boolean = false;
 
   constructor(private instanceContainer: ComponentContainer) { }
 
@@ -20,6 +21,7 @@ export class DraggableDirective {
     this.instanceContainer.getMenu().close();
     if (event.button === 0 && this.isValid(this.item)) {
       DraggableDirective.dragItem = this.item;
+      DraggableDirective.isDragged = true;
     } else if (event.button === 1) {
       this.instanceContainer.getMenu().executeDefault(event, this.item, this.menuOptions);
     }
@@ -29,6 +31,7 @@ export class DraggableDirective {
   private onDrop(event: any) {
     if (event.button === 0 && this.isValid(DraggableDirective.dragItem)) {
       this.onswap.emit({ itemA: DraggableDirective.dragItem, itemB: this.item });
+      DraggableDirective.isDragged = false;
       DraggableDirective.dragItem = null;
     }
   }
