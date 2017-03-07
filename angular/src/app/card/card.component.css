@@ -20,16 +20,8 @@
 
     cursor: default;
 
-
-
-
-
-
-
-
-
-    border-top: 0px;
-    border-bottom: 0px;
-    border-left: 0px;
-    border-right: 0px;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: dashed;
+    border-color: rgba(220,160,140,0.0);
 }

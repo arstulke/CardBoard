@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Card } from '../card';
+import { DraggableDirective } from '../context-menu/draggable.directive';
 
 @Component({
   selector: 'card',
@@ -12,15 +13,19 @@ export class CardComponent {
   private getStyle(): Object {
     let backgroundColor = this.card.getBackgroundColor();
     let textColor = this.card.getTextColor();
-    if (textColor === null || backgroundColor === null) {
-      return {};
-    }
-    else {
-      return {
+
+    let style = {};
+    if (textColor !== null && backgroundColor !== null) {
+      Object.assign(style, {
         backgroundColor: backgroundColor,
         color: textColor
-      };
+      });
     }
+    if (DraggableDirective.isDragged) {
+      Object.assign(style, {
+        borderColor: "#ffb032"
+      });
+    }
+    return style;
   }
-
 }
