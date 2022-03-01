@@ -1,3 +1,9 @@
+# Log4Shell & Logback
+This project is dependent on logback v1.1.9 through Spring Boot v1.5.1.
+The version of Logback contains the vulnerbality CVE-2021-42550 (https://logback.qos.ch/news.html).
+We will not migrate the project to a newer version of Spring Boot or Logback due to the increased effort involved.
+
+# CardBoard
 A Project for managing simple cards on multiple card boards.
 The Project has two subprojects. The Backend and the Frontend.
 
@@ -17,7 +23,7 @@ Build an executable .jar-File:
 * Two options for persisting data:
   * Saving the data in a local filebased SQL-Database (default)
   * Connecting the program to a MySQL-Server
-  
+
   For connecting to a MySQL-Server edit the src/main/resources/application-prod.properties file (spring.datasource properties).
   You can change the port in the src/main/resources/application-prod.properties file (default 8080).
 * Run "mvn clean package" in the root directory.
